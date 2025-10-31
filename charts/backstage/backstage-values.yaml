@@ -259,13 +259,20 @@ upstream:
         enabled: false
       proxy:
         endpoints:
-          /quay/api:
+          '/quay/api':
             changeOrigin: true
             headers:
               Authorization: Bearer ${QUAY_API_TOKEN}
               X-Requested-With: XMLHttpRequest
             secure: true
             target: ${QUAY_URL}
+          '/developer-hub':
+            target: https://${GITLAB_HOST}/
+            pathRewrite:
+              '^/api/proxy/developer-hub/tech-radar': /gitops/build_secured_dev_workflows_idp_gitops/-/raw/main/config/tech-radar.json
+            changeOrigin: true
+            secure: false
+
       quay:
         uiUrl: ${QUAY_URL}
       signInPage: oidc
