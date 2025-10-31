@@ -217,7 +217,7 @@ upstream:
       catalog:
         locations:
 {% for target in rhads_dh_developer_hub_catalog_url %}
-        - target: ${DEVELOPER_HUB_CATALOG_URL}
+        - target: {{ target }}
           type: url
 {% endfor %}
         providers:
