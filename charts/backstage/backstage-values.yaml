@@ -170,7 +170,7 @@ upstream:
 {% set ns = namespace(counter=0) %}
 {% for target in rhads_dh_developer_hub_catalog_url %}
 {% for file in target.file %}
-      - name: DEVELOPER_HUB_CATALOG_URL_{{ counter }}
+      - name: DEVELOPER_HUB_CATALOG_URL_{{ ns.counter }}
         value: https://${GITLAB_HOST}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
 {% set ns.counter = ns.counter + 1 %}
 {% endfor %}
