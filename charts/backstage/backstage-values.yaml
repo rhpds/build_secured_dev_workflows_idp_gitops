@@ -167,6 +167,14 @@ upstream:
         value: {{ rhads_dh_quay_api_token }}
       - name: K8S_SERVICEACCOUNT_TOKEN
         value: {{ rhads_dh_k8s_serviceaccount_token }}
+{% set counter = 0 %}
+{% for target in rhads_dh_developer_hub_catalog_url %}
+{% for file in target.file %}
+      - name: DEVELOPER_HUB_CATALOG_URL_{{ counter }}
+        value: https://${GITLAB_HOST}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
+{% set counter = counter + 1 %}
+{% endfor %}
+{% endfor %}
 
     appConfig:
       app:
@@ -207,11 +215,9 @@ upstream:
           origin: ${BACKEND_URL}
       catalog:
         locations:
-{% for target in rhads_dh_developer_hub_catalog_url %}
-{% for file in target.file %}
-        - target: https://${GITLAB_HOST}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
+{% for i in range(0, counter) %}
+        - target: ${DEVELOPER_HUB_CATALOG_URL_{{ i }}}
           type: url
-{% endfor %}
 {% endfor %}
         providers:
           keycloakOrg:
