@@ -3,6 +3,7 @@ global:
     backend:
       enabled: true
   clusterRouterBase: {{ rhads_dh_ingress_domain }}
+  dynamic:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
