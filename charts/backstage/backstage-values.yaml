@@ -251,7 +251,7 @@ upstream:
       integrations:
         gitlab:
         - host: ${GITLAB_HOST}
-          baseUrl: ${GITLAB_HOST}
+          baseUrl: https://${GITLAB_HOST}
           apiBaseUrl: https://${GITLAB_HOST}/api/v4
           token: ${GITLAB_TOKEN}
 
