@@ -157,8 +157,6 @@ upstream:
         value: {{ rhads_dh_keycloak_client_id }}
       - name: KEYCLOAK_CLIENT_SECRET
         value: {{ rhads_dh_keycloak_client_secret }}
-      - name: DEVELOPER_HUB_CATALOG_URL
-        value: {{ rhads_dh_developer_hub_catalog_url }}
       - name: GITLAB_HOST
         value: {{ rhads_dh_gitlab_host }}
       - name: GITLAB_TOKEN
@@ -169,14 +167,6 @@ upstream:
         value: {{ rhads_dh_quay_api_token }}
       - name: K8S_SERVICEACCOUNT_TOKEN
         value: {{ rhads_dh_k8s_serviceaccount_token }}
-
-  backstage:
-    image:
-      registry: {{ rhads_dh_quay_backstage_registry }}
-      repository: {{ rhads_dh_quay_backstage_image }}
-      tag: {{ rhads_dh_quay_backstage_image_tag }}
-      pullSecrets:
-      - redhat-gpte-devhub-pull-secret
 
     appConfig:
       app:
