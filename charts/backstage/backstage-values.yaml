@@ -217,8 +217,10 @@ upstream:
       catalog:
         locations:
 {% for target in rhads_dh_developer_hub_catalog_url %}
-        - target: {{ target }}
+{% for file in target.file %}
+        - target: https://${GITLAB_HOST}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
           type: url
+{% endfor %}
 {% endfor %}
         providers:
           keycloakOrg:
