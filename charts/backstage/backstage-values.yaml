@@ -250,9 +250,11 @@ upstream:
           - API
       integrations:
         gitlab:
-        - apiBaseUrl: https://${GITLAB_HOST}/api/v4
-          host: ${GITLAB_HOST}
+        - host: ${GITLAB_HOST}
+          baseUrl: ${GITLAB_HOST}
+          apiBaseUrl: https://${GITLAB_HOST}/api/v4
           token: ${GITLAB_TOKEN}
+
       permission:
         enabled: false
       proxy:
