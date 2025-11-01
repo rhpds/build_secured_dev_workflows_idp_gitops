@@ -234,16 +234,6 @@ upstream:
                   seconds: 15
                 timeout:
                   minutes: 2
-          ocm:
-            default:
-              kubernetesPluginRef: rhdh-cluster
-              name: multiclusterhub
-              owner: group:tssc
-              schedule:
-                frequency:
-                  seconds: 10
-                timeout:
-                  seconds: 60
         rules:
         - allow:
           - Component
