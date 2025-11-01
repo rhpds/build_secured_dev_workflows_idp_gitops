@@ -175,6 +175,8 @@ upstream:
 {% set ns.counter = ns.counter + 1 %}
 {% endfor %}
 {% endfor %}
+      - name: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
 
     appConfig:
       app:
