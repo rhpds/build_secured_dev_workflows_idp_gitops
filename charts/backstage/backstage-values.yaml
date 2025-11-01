@@ -304,10 +304,6 @@ upstream:
       # Admin user (superuser)
       postgresUser: postgres
       postgresPassword: {{ rhads_dh_postgresql_password }}
-  service:
-    ports:
-      backend: 4180
-      targetPort: oauth2-proxy
 
 route:
   enabled: true
