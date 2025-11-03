@@ -7,118 +7,118 @@ global:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
-    - disabled: false
-      package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
-      pluginConfig:
-        argocd:
-          appLocatorMethods:
-          - instances: []
-            type: config
-    - disabled: false
-      package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
-      pluginConfig:
-        argocd:
-          appLocatorMethods:
-          - instances: []
-            type: config
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
-      pluginConfig:
-        dynamicPlugins:
-          frontend:
-            backstage-community.plugin-tekton:
-              mountPoints:
-              - config:
-                  if:
-                    allOf:
-                    - isTektonCIAvailable
-                  layout:
-                    gridColumn: 1 / -1
-                    gridRowStart: 1
-                importName: TektonCI
-                mountPoint: entity.page.ci/cards
-    - disabled: false
-      package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
-    - disabled: false
-      package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
-      pluginConfig:
-        dynamicPlugins:
-          frontend:
-            backstage-community.plugin-jenkins:
-              mountPoints:
-              - config:
-                  if:
-                    allOf:
-                    - isJenkinsAvailable
-                  layout:
-                    gridColumn: 1 / -1
-                importName: EntityJenkinsContent
-                mountPoint: entity.page.ci/cards
-    - disabled: false
-      package: oci://quay.io/redhat-tssc/backstage-plugins:1.7.0!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-dynamic
-      pluginConfig:
-        dynamicPlugins:
-          frontend:
-            tssc-plugins.backstage-community-plugin-multi-source-security-viewer:
-              entityTabs:
-              - mountPoint: entity.page.ci
-                path: /ci
-                title: CI
-              mountPoints:
-              - config:
-                  if:
-                    allOf:
-                    - isMultiCIAvailable
-                  layout:
-                    gridColumn: 1 / -1
-                    gridRowStart: 2
-                importName: EntityMultiCIPipelinesContent
-                mountPoint: entity.page.ci/cards
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-quay
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
-      pluginConfig:
-        kubernetes:
-          clusterLocatorMethods:
-          - clusters:
-            - authProvider: serviceAccount
-              customResources:
-              - apiVersion: v1alpha1
-                group: argoproj.io
-                plural: rollouts
-              - apiVersion: v1
-                group: route.openshift.io
-                plural: routes
-              - apiVersion: v1
-                group: tekton.dev
-                plural: pipelineruns
-              - apiVersion: v1
-                group: tekton.dev
-                plural: taskruns
-              name: rhdh-cluster
-              serviceAccountToken: ${K8S_SERVICEACCOUNT_TOKEN}
-              skipTLSVerify: true
-              url: https://kubernetes.default.svc
-            type: config
-          serviceLocatorMethod:
-            type: multiTenant
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-topology
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-plugin-techdocs
-    - disabled: false
-      package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
+    #   pluginConfig:
+    #     argocd:
+    #       appLocatorMethods:
+    #       - instances: []
+    #         type: config
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+    #   pluginConfig:
+    #     argocd:
+    #       appLocatorMethods:
+    #       - instances: []
+    #         type: config
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
+    #   pluginConfig:
+    #     dynamicPlugins:
+    #       frontend:
+    #         backstage-community.plugin-tekton:
+    #           mountPoints:
+    #           - config:
+    #               if:
+    #                 allOf:
+    #                 - isTektonCIAvailable
+    #               layout:
+    #                 gridColumn: 1 / -1
+    #                 gridRowStart: 1
+    #             importName: TektonCI
+    #             mountPoint: entity.page.ci/cards
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
+    #   pluginConfig:
+    #     dynamicPlugins:
+    #       frontend:
+    #         backstage-community.plugin-jenkins:
+    #           mountPoints:
+    #           - config:
+    #               if:
+    #                 allOf:
+    #                 - isJenkinsAvailable
+    #               layout:
+    #                 gridColumn: 1 / -1
+    #             importName: EntityJenkinsContent
+    #             mountPoint: entity.page.ci/cards
+    # - disabled: false
+    #   package: oci://quay.io/redhat-tssc/backstage-plugins:1.7.0!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-dynamic
+    #   pluginConfig:
+    #     dynamicPlugins:
+    #       frontend:
+    #         tssc-plugins.backstage-community-plugin-multi-source-security-viewer:
+    #           entityTabs:
+    #           - mountPoint: entity.page.ci
+    #             path: /ci
+    #             title: CI
+    #           mountPoints:
+    #           - config:
+    #               if:
+    #                 allOf:
+    #                 - isMultiCIAvailable
+    #               layout:
+    #                 gridColumn: 1 / -1
+    #                 gridRowStart: 2
+    #             importName: EntityMultiCIPipelinesContent
+    #             mountPoint: entity.page.ci/cards
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-quay
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+    #   pluginConfig:
+    #     kubernetes:
+    #       clusterLocatorMethods:
+    #       - clusters:
+    #         - authProvider: serviceAccount
+    #           customResources:
+    #           - apiVersion: v1alpha1
+    #             group: argoproj.io
+    #             plural: rollouts
+    #           - apiVersion: v1
+    #             group: route.openshift.io
+    #             plural: routes
+    #           - apiVersion: v1
+    #             group: tekton.dev
+    #             plural: pipelineruns
+    #           - apiVersion: v1
+    #             group: tekton.dev
+    #             plural: taskruns
+    #           name: rhdh-cluster
+    #           serviceAccountToken: ${K8S_SERVICEACCOUNT_TOKEN}
+    #           skipTLSVerify: true
+    #           url: https://kubernetes.default.svc
+    #         type: config
+    #       serviceLocatorMethod:
+    #         type: multiTenant
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-topology
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-plugin-techdocs
+    # - disabled: false
+    #   package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
     - disabled: false
       package: ./dynamic-plugins/dist/backstage-community-plugin-tech-radar
 
@@ -196,15 +196,17 @@ upstream:
       auth:
         environment: production
         providers:
-          oidc:
-            production:
-              clientId: ${AUTH_OIDC_CLIENT_ID}
-              clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
-              metadataUrl: ${AUTH_OIDC_METADATA_URL}
-              prompt: auto
-              signIn:
-                resolvers:
-                - resolver: preferredUsernameMatchingUserEntityName
+          guest:
+            dangerouslyAllowOutsideDevelopment: true
+          # oidc:
+          #   production:
+          #     clientId: ${AUTH_OIDC_CLIENT_ID}
+          #     clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+          #     metadataUrl: ${AUTH_OIDC_METADATA_URL}
+          #     prompt: auto
+          #     signIn:
+          #       resolvers:
+          #       - resolver: preferredUsernameMatchingUserEntityName
         session:
           secret:
             $env: BACKEND_SECRET
@@ -216,54 +218,54 @@ upstream:
         cors:
           origin: ${BACKEND_URL}
       catalog:
-        locations:
+#         locations:
 {% for i in range(0, ns.counter) %}
-        - target: ${DEVELOPER_HUB_CATALOG_URL_{{ i }}}
-          type: url
+#         - target: ${DEVELOPER_HUB_CATALOG_URL_{{ i }}}
+#           type: url
 {% endfor %}
-        providers:
-          keycloakOrg:
-            default:
-              baseUrl: ${KEYCLOAK_BASE_URL}
-              clientId: ${KEYCLOAK_CLIENT_ID}
-              clientSecret: ${KEYCLOAK_CLIENT_SECRET}
-              loginRealm: ${KEYCLOAK_LOGIN_REALM}
-              realm: ${KEYCLOAK_REALM}
-              schedule:
-                frequency:
-                  minutes: 2
-                initialDelay:
-                  seconds: 15
-                timeout:
-                  minutes: 2
-        rules:
-        - allow:
-          - Component
-          - System
-          - Group
-          - User
-          - Resource
-          - Location
-          - Template
-          - API
-      integrations:
-        gitlab:
-        - host: ${GITLAB_HOST}
-          baseUrl: https://${GITLAB_HOST}
-          apiBaseUrl: https://${GITLAB_HOST}/api/v4
-          token: ${GITLAB_TOKEN}
+#         providers:
+#           keycloakOrg:
+#             default:
+#               baseUrl: ${KEYCLOAK_BASE_URL}
+#               clientId: ${KEYCLOAK_CLIENT_ID}
+#               clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+#               loginRealm: ${KEYCLOAK_LOGIN_REALM}
+#               realm: ${KEYCLOAK_REALM}
+#               schedule:
+#                 frequency:
+#                   minutes: 2
+#                 initialDelay:
+#                   seconds: 15
+#                 timeout:
+#                   minutes: 2
+#         rules:
+#         - allow:
+#           - Component
+#           - System
+#           - Group
+#           - User
+#           - Resource
+#           - Location
+#           - Template
+#           - API
+#       integrations:
+#         gitlab:
+#         - host: ${GITLAB_HOST}
+#           baseUrl: https://${GITLAB_HOST}
+#           apiBaseUrl: https://${GITLAB_HOST}/api/v4
+#           token: ${GITLAB_TOKEN}
 
       permission:
         enabled: false
       proxy:
         endpoints:
-          '/quay/api':
-            changeOrigin: true
-            headers:
-              Authorization: Bearer ${QUAY_API_TOKEN}
-              X-Requested-With: XMLHttpRequest
-            secure: true
-            target: ${QUAY_URL}
+          # '/quay/api':
+          #   changeOrigin: true
+          #   headers:
+          #     Authorization: Bearer ${QUAY_API_TOKEN}
+          #     X-Requested-With: XMLHttpRequest
+          #   secure: true
+          #   target: ${QUAY_URL}
           '/developer-hub':
             target: https://${GITLAB_HOST}/
             pathRewrite:
@@ -273,7 +275,8 @@ upstream:
 
       quay:
         uiUrl: ${QUAY_URL}
-      signInPage: oidc
+      signInPage: ""
+      # signInPage: "oidc"
       techdocs:
         builder: local
         generator:
