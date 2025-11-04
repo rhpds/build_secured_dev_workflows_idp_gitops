@@ -275,7 +275,6 @@ upstream:
 
       quay:
         uiUrl: ${QUAY_URL}
-      signInPage: ""
       # signInPage: "oidc"
       techdocs:
         builder: local
