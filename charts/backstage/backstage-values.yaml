@@ -194,7 +194,7 @@ upstream:
         waitCycles: 25
 
       auth:
-        environment: production
+        environment: development
         providers:
           guest:
             dangerouslyAllowOutsideDevelopment: true
