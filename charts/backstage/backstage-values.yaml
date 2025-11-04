@@ -207,6 +207,7 @@ upstream:
           #     signIn:
           #       resolvers:
           #       - resolver: preferredUsernameMatchingUserEntityName
+      # signInPage: "oidc"
         session:
           secret:
             $env: BACKEND_SECRET
@@ -275,7 +276,6 @@ upstream:
 
       quay:
         uiUrl: ${QUAY_URL}
-      # signInPage: "oidc"
       techdocs:
         builder: local
         generator:
