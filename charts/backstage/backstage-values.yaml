@@ -198,15 +198,16 @@ upstream:
         providers:
           guest:
             dangerouslyAllowOutsideDevelopment: true
-          # oidc:
-          #   production:
-          #     clientId: ${AUTH_OIDC_CLIENT_ID}
-          #     clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
-          #     metadataUrl: ${AUTH_OIDC_METADATA_URL}
-          #     prompt: auto
-          #     signIn:
-          #       resolvers:
-          #       - resolver: preferredUsernameMatchingUserEntityName
+      #   environment: production
+      #     oidc:
+      #       production:
+      #         clientId: ${AUTH_OIDC_CLIENT_ID}
+      #         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+      #         metadataUrl: ${AUTH_OIDC_METADATA_URL}
+      #         prompt: auto
+      #         signIn:
+      #           resolvers:
+      #           - resolver: preferredUsernameMatchingUserEntityName
       # signInPage: "oidc"
         session:
           secret:
