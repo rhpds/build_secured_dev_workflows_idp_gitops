@@ -208,10 +208,10 @@ upstream:
       #         signIn:
       #           resolvers:
       #           - resolver: preferredUsernameMatchingUserEntityName
-      # signInPage: "oidc"
         session:
           secret:
             $env: BACKEND_SECRET
+      # signInPage: "oidc"
       backend:
         auth:
           keys:
