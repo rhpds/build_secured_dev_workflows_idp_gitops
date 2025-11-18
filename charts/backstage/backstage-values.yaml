@@ -181,12 +181,12 @@ upstream:
           origin: ${BACKEND_URL}
       catalog:
 #         locations:
-# {% for target in rhads_dh_developer_hub_catalog_url %}
-# {% for file in target.file %}
+{% for target in rhads_dh_developer_hub_catalog_url %}
+{% for file in target.file %}
 #         - target: https://{{ rhads_dh_gitlab_host }}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
 #           type: url
-# {% endfor %}
-# {% endfor %}
+{% endfor %}
+{% endfor %}
 #         rules:
 #         - allow:
 #           - Component
