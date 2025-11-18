@@ -180,38 +180,38 @@ upstream:
         cors:
           origin: ${BACKEND_URL}
       catalog:
-        locations:
-{% for target in rhads_dh_developer_hub_catalog_url %}
-{% for file in target.file %}
-        - target: https://{{ rhads_dh_gitlab_host }}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
-          type: url
-{% endfor %}
-{% endfor %}
-        rules:
-        - allow:
-          - Component
-          - System
-          - Group
-          - User
-          - Resource
-          - Location
-          - Template
-          - API
-        providers:
-          keycloakOrg:
-            default:
-              baseUrl: ${KEYCLOAK_BASE_URL}
-              clientId: ${KEYCLOAK_CLIENT_ID}
-              clientSecret: ${KEYCLOAK_CLIENT_SECRET}
-              loginRealm: ${KEYCLOAK_LOGIN_REALM}
-              realm: ${KEYCLOAK_REALM}
-              schedule:
-                frequency:
-                  minutes: 2
-                initialDelay:
-                  seconds: 15
-                timeout:
-                  minutes: 2
+#         locations:
+# {% for target in rhads_dh_developer_hub_catalog_url %}
+# {% for file in target.file %}
+#         - target: https://{{ rhads_dh_gitlab_host }}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
+#           type: url
+# {% endfor %}
+# {% endfor %}
+#         rules:
+#         - allow:
+#           - Component
+#           - System
+#           - Group
+#           - User
+#           - Resource
+#           - Location
+#           - Template
+#           - API
+#         providers:
+#           keycloakOrg:
+#             default:
+#               baseUrl: ${KEYCLOAK_BASE_URL}
+#               clientId: ${KEYCLOAK_CLIENT_ID}
+#               clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+#               loginRealm: ${KEYCLOAK_LOGIN_REALM}
+#               realm: ${KEYCLOAK_REALM}
+#               schedule:
+#                 frequency:
+#                   minutes: 2
+#                 initialDelay:
+#                   seconds: 15
+#                 timeout:
+#                   minutes: 2
         
       integrations:
         gitlab:
