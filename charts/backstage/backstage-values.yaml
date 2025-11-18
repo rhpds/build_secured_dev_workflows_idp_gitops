@@ -132,8 +132,7 @@ upstream:
       - redhat-gpte-devhub-pull-secret
     
     extraEnvVarsSecrets:
-      - name: BACKEND_SECRET
-        value: backstage-env-secret
+      - backstage-env-secret
     extraEnvVars:
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
