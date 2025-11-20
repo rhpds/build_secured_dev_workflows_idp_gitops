@@ -130,21 +130,14 @@ upstream:
       tag: '{{ rhads_dh_quay_backstage_image_tag }}'
       pullSecrets:
       - redhat-gpte-devhub-pull-secret
+    
+    extraEnvVarsSecrets:
+      - backstage-env-secret
     extraEnvVars:
-      - name: BACKEND_SECRET
-        value: "{{ '{{ randAlphaNum 24 | b64enc }}' }}"
       - name: BACKEND_URL
         value: {{ rhads_dh_backstage_url }}
-      - name: ARGOCD_USER
-        value: {{ rhads_dh_argocd_user }}
-      - name: ARGOCD_PASSWORD
-        value: {{ rhads_dh_argocd_password }}
       - name: ARGOCD_URL
         value: {{ rhads_dh_argocd_url }}
-      - name: AUTH_OIDC_CLIENT_ID
-        value: {{ rhads_dh_auth_oidc_client_id }}
-      - name: AUTH_OIDC_CLIENT_SECRET
-        value: {{ rhads_dh_auth_oidc_client_secret }}
       - name: AUTH_OIDC_METADATA_URL
         value: {{ rhads_dh_auth_oidc_metadata_url }}
       - name: KEYCLOAK_LOGIN_REALM
@@ -153,28 +146,10 @@ upstream:
         value: {{ rhads_dh_keycloak_realm }}
       - name: KEYCLOAK_BASE_URL
         value: {{ rhads_dh_keycloak_base_url }}
-      - name: KEYCLOAK_CLIENT_ID
-        value: {{ rhads_dh_keycloak_client_id }}
-      - name: KEYCLOAK_CLIENT_SECRET
-        value: {{ rhads_dh_keycloak_client_secret }}
       - name: GITLAB_HOST
         value: {{ rhads_dh_gitlab_host }}
-      - name: GITLAB_TOKEN
-        value: {{ rhads_dh_gitlab_token }}
       - name: QUAY_URL
         value: {{ rhads_dh_quay_url }}
-      - name: QUAY_API_TOKEN
-        value: {{ rhads_dh_quay_api_token }}
-      - name: K8S_SERVICEACCOUNT_TOKEN
-        value: {{ rhads_dh_k8s_serviceaccount_token }}
-{% set ns = namespace(counter=0) %}
-{% for target in rhads_dh_developer_hub_catalog_url %}
-{% for file in target.file %}
-      - name: DEVELOPER_HUB_CATALOG_URL_{{ ns.counter }}
-        value: https://{{ rhads_dh_gitlab_host }}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
-{% set ns.counter = ns.counter + 1 %}
-{% endfor %}
-{% endfor %}
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
 
@@ -222,10 +197,22 @@ upstream:
           origin: ${BACKEND_URL}
       catalog:
 #         locations:
-{% for i in range(0, ns.counter) %}
-#         - target: ${DEVELOPER_HUB_CATALOG_URL_{{ i }}}
+{% for target in rhads_dh_developer_hub_catalog_url %}
+{% for file in target.file %}
+#         - target: https://{{ rhads_dh_gitlab_host }}/{{ target.group }}/{{ target.repository }}/blob/{{ target.revision }}/{{ file }}
 #           type: url
 {% endfor %}
+{% endfor %}
+#         rules:
+#         - allow:
+#           - Component
+#           - System
+#           - Group
+#           - User
+#           - Resource
+#           - Location
+#           - Template
+#           - API
 #         providers:
 #           keycloakOrg:
 #             default:
@@ -241,22 +228,13 @@ upstream:
 #                   seconds: 15
 #                 timeout:
 #                   minutes: 2
-#         rules:
-#         - allow:
-#           - Component
-#           - System
-#           - Group
-#           - User
-#           - Resource
-#           - Location
-#           - Template
-#           - API
-#       integrations:
-#         gitlab:
-#         - host: ${GITLAB_HOST}
-#           baseUrl: https://${GITLAB_HOST}
-#           apiBaseUrl: https://${GITLAB_HOST}/api/v4
-#           token: ${GITLAB_TOKEN}
+#
+#      integrations:
+#        gitlab:
+#        - host: ${GITLAB_HOST}
+#          baseUrl: https://${GITLAB_HOST}
+#          apiBaseUrl: https://${GITLAB_HOST}/api/v4
+#          token: ${GITLAB_TOKEN}
 
       permission:
         enabled: false
@@ -285,9 +263,6 @@ upstream:
         publisher:
           type: local
 
-      permission:
-        enabled: false
-
       enabled:
         kubernetes: true
         techdocs: true
@@ -304,12 +279,12 @@ upstream:
   postgresql:
     auth:
       username: bn_backstage
-      password: {{ rhads_dh_postgresql_password }}
-      database: postgres
-
-      # Admin user (superuser)
       postgresUser: postgres
-      postgresPassword: {{ rhads_dh_postgresql_password }}
+      database: postgres
+      existingSecret: backstage-postgresql
+      secretKeys:
+        adminPasswordKey: postgres-password
+        userPasswordKey: password
 
 route:
   enabled: true
