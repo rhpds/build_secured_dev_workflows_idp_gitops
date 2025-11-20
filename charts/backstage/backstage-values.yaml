@@ -134,6 +134,22 @@ upstream:
     extraEnvVarsSecrets:
       - backstage-env-secret
     extraEnvVars:
+      - name: BACKEND_URL
+        value: {{ rhads_dh_backstage_url }}
+      - name: ARGOCD_URL
+        value: {{ rhads_dh_argocd_url }}
+      - name: AUTH_OIDC_METADATA_URL
+        value: {{ rhads_dh_auth_oidc_metadata_url }}
+      - name: KEYCLOAK_LOGIN_REALM
+        value: {{ rhads_dh_keycloak_login_realm }}
+      - name: KEYCLOAK_REALM
+        value: {{ rhads_dh_keycloak_realm }}
+      - name: KEYCLOAK_BASE_URL
+        value: {{ rhads_dh_keycloak_base_url }}
+      - name: GITLAB_HOST
+        value: {{ rhads_dh_gitlab_host }}
+      - name: QUAY_URL
+        value: {{ rhads_dh_quay_url }}
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
 
